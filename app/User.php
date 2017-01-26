@@ -37,6 +37,7 @@ class User extends Authenticatable
 
     public function getAvatarAttribute()
     {
-        return 'https://www.gravatar.com/avatar/'. md5($this->email) . '?s=45&d=mm';
+        return asset('img/default.png');
+        // return 'https://www.gravatar.com/avatar/'. md5($this->email) . '?s=45&d=mm';
     }
 }
