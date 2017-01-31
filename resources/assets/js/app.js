@@ -17,6 +17,8 @@ Vue.component('timeline', require('./components/Timeline.vue'));
 Vue.component('post', require('./components/Post.vue'));
 Vue.component('post-form', require('./components/PostForm.vue'));
 
+// window.eventBus = new Vue();
+
 const app = new Vue({
     el: '#app'
 });

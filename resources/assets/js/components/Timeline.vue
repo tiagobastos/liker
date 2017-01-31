@@ -6,6 +6,7 @@
                     <div class="panel-heading">Timeline</div>
 
                     <div class="panel-body">
+                        <!-- <post-form v-on:post-added="addPost"></post-form> -->
                         <post-form></post-form>
                         <hr>
                         <post v-for="post in posts" :post="post"></post>
@@ -28,20 +29,21 @@
             }
         },
         components: {
-            Post, PostForm
+            'post': Post,
+            'post-form': PostForm
         },
-        method: {
+        methods: {
             addPost (post) {
-                this.posts.unshift(post);
+                this.posts.unshift(post.data);
             }
         },
         mounted() {
             axios.get('/posts').then((response) => {
                 this.posts = response.data;
             });
-        },
-        created() {
+
             eventHub.$on('post-added', this.addPost);
+            // window.eventBus.$on('post-added', function(data) { doSomething() });
         }
     }
 </script>

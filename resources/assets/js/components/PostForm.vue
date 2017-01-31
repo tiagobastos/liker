@@ -25,6 +25,7 @@
                 }).then((response) => {
                     // Sucess Request
                     eventHub.$emit('post-added', { data: response.data });
+                    // window.eventBus.$emit('post-added', { data: response.data });
                     this.body = null;
                 });
             }
