@@ -9,7 +9,7 @@
                         <!-- <post-form v-on:post-added="addPost"></post-form> -->
                         <post-form></post-form>
                         <hr>
-                        <post v-for="post in posts" :post="post"></post>
+                        <post v-for="post in posts" :post="post" v-model="posts"></post>
                     </div>
                 </div>
             </div>

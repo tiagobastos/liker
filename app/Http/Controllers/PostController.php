@@ -20,7 +20,6 @@ class PostController extends Controller
      */
     public function index(Request $request, Post $post)
     {
-
         return $post->with('user')->latestFirst()->get();
     }
 

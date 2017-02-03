@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Post;
+use App\Like;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -39,5 +40,10 @@ class User extends Authenticatable
     {
         return asset('img/default.png');
         // return 'https://www.gravatar.com/avatar/'. md5($this->email) . '?s=45&d=mm';
+    }
+
+    public function likes()
+    {
+        return $this->morphMany(Like::class, 'likeable');
     }
 }
