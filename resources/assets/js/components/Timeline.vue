@@ -18,7 +18,7 @@
 </template>
 
 <script>
-    import eventHub from '../event'
+    import eventHub from '../event';
     import Post from './Post.vue';
     import PostForm from './PostForm.vue';
 
@@ -35,6 +35,18 @@
         methods: {
             addPost (post) {
                 this.posts.unshift(post.data);
+            },
+            likePost (postId) {
+                for (var i = 0; i < this.posts.length; i++) {
+                    console.log(postId);
+                    console.log(this.posts[i]);
+
+                    if (this.posts[i].id === postId) {
+                        this.posts[i].likeCount++;
+                        this.posts[i].likedByCurrentUser = true;
+                        break;
+                    }
+                }
             }
         },
         mounted() {
@@ -44,6 +56,8 @@
 
             eventHub.$on('post-added', this.addPost);
             // window.eventBus.$on('post-added', function(data) { doSomething() });
+            
+            eventHub.$on('post-liked', this.likePost);
         }
     }
 </script>

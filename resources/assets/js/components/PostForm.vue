@@ -10,7 +10,7 @@
 </template>
 
 <script>
-    import eventHub from '../event'
+    import eventHub from '../event';
 
     export default {
         data () {
