@@ -10,9 +10,12 @@
     "axios": "^0.15.2",
     "bootstrap-sass": "^3.3.7",
     "jquery": "^3.1.0",
+    "laravel-echo": "^1.2.3",
     "laravel-mix": "^0.5.0",
     "lodash": "^4.16.2",
     "pluralize": "^3.1.0",
+    "pusher-js": "^4.0.0",
+    "react-native": "^0.41.2",
     "vue": "^2.0.1"
   },
   "dependencies": {

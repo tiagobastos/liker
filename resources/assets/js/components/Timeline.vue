@@ -34,7 +34,7 @@
         },
         methods: {
             addPost (post) {
-                this.posts.unshift(post.data);
+                this.posts.unshift(post);
             },
             likePost (postId) {
                 for (var i = 0; i < this.posts.length; i++) {
@@ -50,14 +50,17 @@
             }
         },
         mounted() {
+            eventHub.$on('post-added', this.addPost);
+            eventHub.$on('post-liked', this.likePost);
+
             axios.get('/posts').then((response) => {
+                Echo.private('post-created').listen('PostWasCreated', (e)=> {
+                    eventHub.$emit('post-added', e.post);
+                });
+
                 this.posts = response.data;
             });
 
-            eventHub.$on('post-added', this.addPost);
-            // window.eventBus.$on('post-added', function(data) { doSomething() });
-            
-            eventHub.$on('post-liked', this.likePost);
         }
     }
 </script>
