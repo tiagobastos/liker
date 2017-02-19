@@ -36,11 +36,15 @@
             addPost (post) {
                 this.posts.unshift(post);
             },
-            likePost (postId) {
+            likePost (postId, likedByCurrentUser) {
                 for (var i = 0; i < this.posts.length; i++) {
                     if (this.posts[i].id === postId) {
                         this.posts[i].likeCount++;
-                        this.posts[i].likedByCurrentUser = true;
+
+                        if (likedByCurrentUser) {
+                            this.posts[i].likedByCurrentUser = true;
+                        }
+
                         break;
                     }
                 }
@@ -54,6 +58,10 @@
                 
                 Echo.private('post-created').listen('PostWasCreated', (e)=> {
                     eventHub.$emit('post-added', e.post);
+                });
+
+                Echo.private('post-liked').listen('PostWasLiked', (e)=> {
+                    eventHub.$emit('post-liked', e.post.id, false);
                 });
 
                 this.posts = response.data;

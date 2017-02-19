@@ -18,3 +18,7 @@ Broadcast::channel('App.User.{id}', function ($user, $id) {
 Broadcast::channel('post-created', function ($user) {
     return true;
 });
+
+Broadcast::channel('post-liked', function ($user) {
+    return true;
+});
