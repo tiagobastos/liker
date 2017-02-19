@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Post;
 use App\Events\PostWasCreated;
-use Illuminate\Http\Request;
 use App\Http\Requests\PostRequest;
+
+use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
@@ -43,7 +44,7 @@ class PostController extends Controller
     public function store(PostRequest $request)
     {
         $post = $request->user()->posts()->create([
-            'body' => $request->body // $request->get('body')
+            'body' => $request->body
         ]);
 
         broadcast(new PostWasCreated($post))->toOthers();

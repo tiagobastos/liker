@@ -38,9 +38,6 @@
             },
             likePost (postId) {
                 for (var i = 0; i < this.posts.length; i++) {
-                    console.log(postId);
-                    console.log(this.posts[i]);
-
                     if (this.posts[i].id === postId) {
                         this.posts[i].likeCount++;
                         this.posts[i].likedByCurrentUser = true;
@@ -54,6 +51,7 @@
             eventHub.$on('post-liked', this.likePost);
 
             axios.get('/posts').then((response) => {
+                
                 Echo.private('post-created').listen('PostWasCreated', (e)=> {
                     eventHub.$emit('post-added', e.post);
                 });

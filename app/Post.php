@@ -11,7 +11,7 @@ class Post extends Model
 {
     protected $fillable = ['body'];
 
-    protected $appends = ['likeCount', 'likedByCurrentUser', 'canBeLikedByCurrentUser'];
+    protected $appends = ['likeCount', 'likedByCurrentUser'];
 
     // Scopes
     public function scopeLatestFirst($query)
@@ -28,11 +28,6 @@ class Post extends Model
     public function getLikedByCurrentUserAttribute()
     {
         return $this->likes->where('user_id', Auth::user()->id)->count() === 1;
-    }
-
-    public function getCanBeLikedByCurrentUserAttribute()
-    {
-        return $this->user->id !== Auth::user()->id;
     }
 
     // Relations

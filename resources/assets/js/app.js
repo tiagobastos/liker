@@ -21,5 +21,6 @@ Vue.component('like-button', require('./components/LikeButton.vue'));
 // window.eventBus = new Vue();
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    data: window.Laravel
 });
