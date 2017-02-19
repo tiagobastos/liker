@@ -64,6 +64,17 @@
                     eventHub.$emit('post-liked', e.post.id, false);
                 });
 
+                if (window.Notification && Notification.permission !== 'denied') {  
+                    Notification.requestPermission((status) => {
+                        Echo.private('App.User.' + this.$root.user.id ).listen('PostWasLiked', (e)=> {
+                            new Notification('Post Liked', {
+                                body: e.user.name + ' Liked Your Post "' + e.post.body + '"'
+                            });
+                        });
+                    });
+                }
+
+
                 this.posts = response.data;
             });
 

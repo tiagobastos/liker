@@ -3,6 +3,7 @@
 namespace App\Events;
 
 use App\Post;
+use App\User;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Broadcasting\PrivateChannel;
@@ -17,14 +18,17 @@ class PostWasLiked implements ShouldBroadcast
 
     public $post;
     
+    public $user; 
+
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(Post $post)
+    public function __construct(Post $post, User $user)
     {
         $this->post = $post;
+        $this->user = $user;
     }
 
     /**
@@ -34,7 +38,10 @@ class PostWasLiked implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('post-liked');
+        return [
+            new PrivateChannel('post-liked'),
+            new PrivateChannel('App.User.' . $this->post->user->id)
+        ];
     }
 
     public function broadcastWith()
@@ -42,7 +49,8 @@ class PostWasLiked implements ShouldBroadcast
         return [
             'post' => array_merge($this->post->toArray(), [
                 'user' => $this->post->user 
-            ])
+            ]),
+            'user' => $this->user
         ];
     }
 }
